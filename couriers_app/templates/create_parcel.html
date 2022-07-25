@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>CMS - Company Login</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %} " />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fontAwesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/hero-slider.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/datepicker.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+
+    <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+    <!--
+	Venue Template
+	http://www.templatemo.com/tm-522-venue
+-->
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header id="header">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <button id="primary-nav-button" type="button">Menu</button>
+              <div class="logo">
+                <a href="{% url 'index' %}">
+                    <h1 class="logo-title">Courier Company Management System</h1>
+                </a>
+              </div>
+              <!-- / #primary-nav -->
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    {% if messages %}
+    <div class="col-md-12">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="left-content">
+              <div class="row">
+                <div class="col-md-8">
+                  <ul class="messages">
+                    {% for message in messages %}
+                    <li
+                      {%
+                      if
+                      message.tags
+                      %}
+                      class=" {{ message.tags }} "
+                      {%
+                      endif
+                      %}
+                    >
+                      {{ message }}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <section style="padding: 50px" class="banner" id="top">
+      <div class="container">
+        {% if flag %}
+
+        <div class="row">
+          <div
+            style="text-align: center; justify-content: center"
+            class="alert alert-danger col-md-12"
+          >
+            {{ msg }}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="left-content">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="section-heading">
+                          <h3>
+                            There is/are <strong> {{ dep_len }} </strong> depot
+                            in your area
+                          </h3>
+                        </div>
+                      </div>
+
+                      <form method="POST" action="{% url 'create-parcel' %}">
+                        {% csrf_token %}
+
+                        <div class="col-md-12">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Reciever Name</label
+                            >
+                            {{form.r_name}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Reciever Contact Number</label
+                            >
+                            {{form.r_contact}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Reciever Address</label
+                            >
+                            {{form.r_address}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Reciever City</label
+                            >
+                            {{form.r_city}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Reciever Zip</label
+                            >
+                            {{form.r_zip}}
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-12">
+                          <h5><u> Package Information </u></h5>
+                          <hr />
+                        </div>
+
+                        <div class="col-md-12">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Package Description</label
+                            >
+                            {{form.pack_details}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <label for="{{ form.username.id_for_label }}"
+                              >Package Weight (in kg)</label
+                            >
+                            {{form.pack_weight}}
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-12">
+                          <fieldset>
+                            <button type="submit" id="form-submit" class="btn">
+                              Add Package
+                            </button>
+                          </fieldset>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sub-footer">
+      <p>
+        Copyright &copy; 2018 Company Name - Design:
+        <a rel="nofollow" href="http://www.templatemo.com">Template Mo</a>
+      </p>
+    </div>
+
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="js/vendor/jquery-1.11.2.min.js"><\/script>'
+        );
+    </script>
+
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/datepicker.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>CMS - Customer Register</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %} " />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fontAwesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/hero-slider.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/datepicker.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+
+    <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+    <!--
+	Venue Template
+	http://www.templatemo.com/tm-522-venue
+-->
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header id="header">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <button id="primary-nav-button" type="button">Menu</button>
+              <div class="logo">
+                <a href="{% url 'index' %}">
+                    <h1 class="logo-title">Courier Company Management System</h1>
+                </a>
+              </div>
+
+              <!-- / #primary-nav -->
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <section style="padding: 100px" class="banner" id="top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="left-content">
+                    <div
+                      style="
+                        justify-items: center;
+                        justify-content: center;
+                        margin: auto;
+                      "
+                      class="row"
+                    >
+                      <div class="col-md-8">
+                        <div class="section-heading">
+                          <h2>Add Employee</h2>
+                        </div>
+                      </div>
+
+                      {{ urf.errors }} {{ upf.errors }}
+
+                      <form
+                        class="submit-form"
+                        action="{% url 'add-employee' %}"
+                        method="POST"
+                      >
+                        {% csrf_token %}
+
+                        <div class="col-md-12">
+                          <fieldset>
+                            <label for="">Select Depot</label>
+
+                            <select name="depot" id="">
+                              {% for as in depot %}
+                              <option value="{{ as.id }}">
+                                {{ as.address }}
+                              </option>
+                              {% endfor %}
+                            </select>
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ urf.first_name.id_for_label }}"
+                              >First Name</label
+                            >
+                            {{urf.first_name}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ urf.last_name.id_for_label }}"
+                              >Last Name</label
+                            >
+                            {{urf.last_name}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ urf.email.id_for_label }}"
+                              >email</label
+                            >
+                            {{urf.email}}
+                          </fieldset>
+                        </div>
+
+                        <hr />
+
+                        <!-- 'contact', 'zip','city','address' -->
+
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ upf.contact.id_for_label }}"
+                              >Contact Number</label
+                            >
+                            {{upf.contact}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ upf.address.id_for_label }}"
+                              >Address</label
+                            >
+                            {{upf.address}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ upf.zip.id_for_label }}"
+                              >Zip Code</label
+                            >
+                            {{upf.zip}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <label for="{{ upf.city.id_for_label }}"
+                              >City</label
+                            >
+                            {{upf.city}}
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ urf.username.id_for_label }}"
+                              >Username</label
+                            >
+                            {{urf.username}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ urf.password.id_for_label }}"
+                              >Password</label
+                            >
+                            {{urf.password}}
+                          </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                          <fieldset>
+                            <label for="{{ urf.password_confirm.id_for_label }}"
+                              >Confirm Password</label
+                            >
+                            {{urf.password_confirm}}
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-12"></div>
+
+                        <div class="col-md-6">
+                          <fieldset>
+                            <button type="submit" id="form-submit" class="btn">
+                              Register
+                            </button>
+                          </fieldset>
+                        </div>
+                        <div style="padding-top: 15px" class="col-md-6">
+                          <a href="{% url 'customer-login' %}"
+                            >Already registered? Login Here.</a
+                          >
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sub-footer">
+      <p>
+        Copyright &copy; 2018 Company Name - Design:
+        <a rel="nofollow" href="http://www.templatemo.com">Template Mo</a>
+      </p>
+    </div>
+
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="js/vendor/jquery-1.11.2.min.js"><\/script>'
+        );
+    </script>
+
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/datepicker.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
